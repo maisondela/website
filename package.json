@@ -1,0 +1,14 @@
+{
+  "name": "maisondela-site",
+  "version": "1.0.0",
+  "description": "Site vitrine de l'association — Eleventy + Sveltia CMS",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6"
+  }
+}

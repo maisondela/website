@@ -1,0 +1,134 @@
+:root {
+  --color-bg: #fdfcfa;
+  --color-text: #1f2933;
+  --color-text-muted: #52606d;
+  --color-primary: #7c2d3e;
+  --color-border: #e4e0da;
+  --content-width: 42rem;
+  --space: 1rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+main {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: calc(var(--space) * 2) var(--space);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+a {
+  color: var(--color-primary);
+
+  &:hover,
+  &:focus {
+    text-decoration-thickness: 2px;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+time {
+  color: var(--color-text-muted);
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space);
+  padding: var(--space);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: var(--space);
+  margin-left: auto;
+}
+
+.site-footer {
+  margin-top: calc(var(--space) * 3);
+  padding: calc(var(--space) * 2) var(--space);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.site-footer-name {
+  font-weight: 700;
+}
+
+.cards {
+  display: grid;
+  gap: var(--space);
+}
+
+.event-card,
+.article-card {
+  padding: var(--space);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+
+  & h3 {
+    margin: 0 0 0.25rem;
+  }
+
+  & p {
+    margin: 0.25rem 0;
+  }
+}
+
+.event-card-location {
+  color: var(--color-text-muted);
+}
+
+.article-meta {
+  color: var(--color-text-muted);
+}
+
+.article-cover {
+  border-radius: 0.5rem;
+}
+
+.event-meta {
+  color: var(--color-text-muted);
+}
+
+.hero {
+  text-align: center;
+  padding-block: var(--space);
+
+  & h1 {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.home-section {
+  margin-top: calc(var(--space) * 2);
+}

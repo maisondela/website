@@ -1,0 +1,11 @@
+{% macro eventCard(event) %}
+<article class="event-card">
+  <h3 class="event-card-title">
+    <a href="{{ event.url }}">{{ event.data.title }}</a>
+  </h3>
+  <p class="event-card-date">
+    <time datetime="{{ event.data.date | isoDate }}">{{ event.data.date | formatDateTime }}</time>
+  </p>
+  <p class="event-card-location">{{ event.data.location }}</p>
+</article>
+{% endmacro %}

@@ -1,0 +1,37 @@
+---
+layout: layouts/base.njk
+permalink: /index.html
+---
+{% from "components/event-card.njk" import eventCard %}
+{% from "components/article-card.njk" import articleCard %}
+
+<section class="hero">
+  <h1>{{ association.name }}</h1>
+  <p>{{ association.description }}</p>
+</section>
+
+<section class="home-section">
+  <h2>Prochains événements</h2>
+  {% set upcoming = collections.events | upcomingEvents %}
+  {% if upcoming.length %}
+    <div class="cards">
+      {% for event in upcoming.slice(0, 3) %}
+        {{ eventCard(event) }}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Aucun événement à venir pour le moment.</p>
+  {% endif %}
+  <p><a href="/agenda/">Voir tout l'agenda</a></p>
+</section>
+
+<section class="home-section">
+  <h2>Dernières actualités</h2>
+  <div class="cards">
+    {% set latest = collections.articles | byDateDescending %}
+    {% for article in latest.slice(0, 3) %}
+      {{ articleCard(article) }}
+    {% endfor %}
+  </div>
+  <p><a href="/actualites/">Toutes les actualités</a></p>
+</section>

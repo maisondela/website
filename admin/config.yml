@@ -1,0 +1,46 @@
+backend:
+  name: github
+  repo: ljcsilvert/maisondela
+  branch: main
+
+media_folder: uploads
+public_folder: /uploads
+
+locale: fr
+
+collections:
+  - name: articles
+    label: Actualités
+    label_singular: Article
+    folder: content/articles
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - { name: title, label: Titre, widget: string }
+      - { name: date, label: Date de publication, widget: datetime }
+      - { name: image, label: Image de couverture, widget: image, required: false }
+      - { name: body, label: Contenu, widget: markdown }
+
+  - name: events
+    label: Agenda
+    label_singular: Événement
+    folder: content/events
+    create: true
+    slug: "{{fields.date}}-{{slug}}"
+    fields:
+      - { name: title, label: Titre, widget: string }
+      - { name: date, label: Date et heure, widget: datetime }
+      - { name: location, label: Lieu, widget: string }
+      - { name: body, label: Description, widget: markdown }
+
+  - name: settings
+    label: Paramètres du site
+    files:
+      - name: association
+        label: Informations de l'association
+        file: content/data/association.json
+        fields:
+          - { name: name, label: Nom de l'association, widget: string }
+          - { name: description, label: Description courte, widget: text }
+          - { name: address, label: Adresse, widget: text }
+          - { name: email, label: Email de contact, widget: string }

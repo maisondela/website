@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+---
+<article class="event">
+  <header class="event-header">
+    <h1>{{ title }}</h1>
+    <p class="event-meta">
+      <time datetime="{{ date | isoDate }}">{{ date | formatDateTime }}</time><br>
+      {{ location }}
+    </p>
+  </header>
+  <div class="event-body">
+    {{ content | safe }}
+  </div>
+  <p><a href="/agenda/">← Tout l'agenda</a></p>
+</article>

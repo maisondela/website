@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: Agenda
+permalink: /agenda/index.html
+---
+{% from "components/event-card.njk" import eventCard %}
+
+<h1>Agenda</h1>
+
+{% set upcoming = collections.events | upcomingEvents %}
+{% if upcoming.length %}
+  <div class="cards">
+    {% for event in upcoming %}
+      {{ eventCard(event) }}
+    {% endfor %}
+  </div>
+{% else %}
+  <p>Aucun événement à venir pour le moment. Revenez bientôt !</p>
+{% endif %}

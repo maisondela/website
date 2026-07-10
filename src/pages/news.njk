@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+title: Actualités
+permalink: /actualites/index.html
+---
+{% from "components/article-card.njk" import articleCard %}
+
+<h1>Actualités</h1>
+
+<div class="cards">
+  {% for article in collections.articles | byDateDescending %}
+    {{ articleCard(article) }}
+  {% endfor %}
+</div>
