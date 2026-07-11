@@ -5,6 +5,12 @@ const md = markdownIt();
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/three/build/three.module.min.js":
+      "assets/vendor/three.module.min.js",
+    "node_modules/three/build/three.core.min.js":
+      "assets/vendor/three.core.min.js",
+  });
   eleventyConfig.addPassthroughCopy("uploads");
   eleventyConfig.addPassthroughCopy("admin");
 
