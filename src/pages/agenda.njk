@@ -3,17 +3,23 @@ layout: layouts/base.njk
 title: Agenda
 permalink: /agenda/index.html
 ---
-{% from "components/event-card.njk" import eventCard %}
+{% from "components/event-card.njk" import eventRow %}
 
-<h1>Agenda</h1>
+<div class="page page-wide">
+  <header class="page-head">
+    <p class="kicker">Agenda</p>
+    <h1>Prochaines dates</h1>
+    <p class="page-lede">Cabarets, scènes ouvertes, défilés et fêtes : là où les Créatures se produisent.</p>
+  </header>
 
-{% set upcoming = collections.events | upcomingEvents %}
-{% if upcoming.length %}
-  <div class="cards">
-    {% for event in upcoming %}
-      {{ eventCard(event) }}
-    {% endfor %}
+  {% set upcoming = collections.events | upcomingEvents %}
+  <div class="program">
+    {% if upcoming.length %}
+      {% for event in upcoming %}
+        {{ eventRow(event) }}
+      {% endfor %}
+    {% else %}
+      <p class="program-empty">Aucune date annoncée pour le moment — revenez bientôt, les Créatures préparent quelque chose.</p>
+    {% endif %}
   </div>
-{% else %}
-  <p>Aucun événement à venir pour le moment. Revenez bientôt !</p>
-{% endif %}
+</div>

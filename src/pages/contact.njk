@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: Contact
+permalink: /contact/index.html
+---
+<div class="page">
+  <header class="page-head">
+    <p class="kicker">Contact</p>
+    <h1>Nous écrire</h1>
+    <p class="page-lede">Pour inviter les Créatures, programmer une lecture, un cabaret, un workshop — ou simplement nous dire bonjour.</p>
+  </header>
+
+  <div class="prose">
+    <p>Écrivez-nous à <a href="mailto:{{ association.email }}">{{ association.email }}</a> en précisant le lieu, la date envisagée et le format qui vous intéresse.</p>
+    <p>Pour les cabarets et défilés, pensez à joindre la fiche technique et les conditions de votre lieu : elles nous permettent de construire la proposition.</p>
+  </div>
+
+  <a class="btn btn-flame" href="mailto:{{ association.email }}">{{ association.email }}</a>
+</div>

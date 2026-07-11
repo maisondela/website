@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+title: Propositions artistiques
+permalink: /propositions-artistiques/index.html
+---
+<div class="page">
+  <header class="page-head">
+    <p class="kicker">Propositions artistiques</p>
+    <h1>Ce que font les Créatures</h1>
+    <p class="page-lede">Du cabaret au défilé, de la lecture en médiathèque au DJ set : des formes à inviter dans vos lieux, vos écoles, vos scènes et vos nuits.</p>
+  </header>
+
+  {% for offering in offerings %}
+    <section class="offering" id="{{ offering.slug }}">
+      <h2>{{ offering.title }}</h2>
+      {% for paragraph in offering.paragraphs %}
+        <p>{{ paragraph }}</p>
+      {% endfor %}
+      <p class="offering-price">{{ offering.price }}</p>
+    </section>
+  {% endfor %}
+
+  <a class="btn btn-flame" href="/contact/">Demander un devis</a>
+</div>

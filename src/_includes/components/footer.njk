@@ -1,5 +1,21 @@
-<footer class="site-footer">
-  <p class="site-footer-name">{{ association.name }}</p>
-  <p>{{ association.address | nl2br | safe }}</p>
-  <p><a href="mailto:{{ association.email }}">{{ association.email }}</a></p>
+<footer class="site-footer night">
+  <div class="site-footer-inner">
+    <p class="site-footer-name">
+      <img class="site-footer-logo" src="/media/logo/logo-white.png" alt="{{ association.name }}" eleventy:widths="400">
+    </p>
+    <div class="site-footer-grid">
+      <div>
+        <p><a href="mailto:{{ association.email }}">{{ association.email }}</a></p>
+        <p>{{ association.address | nl2br | safe }}</p>
+      </div>
+      <div>
+        <p><a href="/propositions-artistiques/">Inviter les Créatures</a></p>
+        <p><a href="/agenda/">Prochaines dates</a></p>
+      </div>
+      <div>
+        <p class="site-footer-safer">Des espaces safe et bienveillants, pour toustes.</p>
+      </div>
+    </div>
+    <p class="site-footer-credit">© 2026 {{ association.name }} — Identité graphique : Very Superflu</p>
+  </div>
 </footer>

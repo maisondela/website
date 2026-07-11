@@ -2,36 +2,89 @@
 layout: layouts/base.njk
 permalink: /index.html
 ---
-{% from "components/event-card.njk" import eventCard %}
+{% from "components/event-card.njk" import eventRow %}
 {% from "components/article-card.njk" import articleCard %}
 
-<section class="hero">
-  <h1>{{ association.name }}</h1>
-  <p>{{ association.description }}</p>
-</section>
-
-<section class="home-section">
-  <h2>Prochains événements</h2>
-  {% set upcoming = collections.events | upcomingEvents %}
-  {% if upcoming.length %}
-    <div class="cards">
-      {% for event in upcoming.slice(0, 3) %}
-        {{ eventCard(event) }}
+<section class="night hero-stage">
+  <img class="hero-photo" src="/media/artwork/pink.avif" alt="" sizes="100vw" eleventy:widths="800,1440" loading="eager" decoding="async" fetchpriority="high">
+  <div class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-title"><span>Maison</span><span>De La</span></h1>
+      <p class="hero-lede">Collectif bordelais d'Art Drag. Cabarets, défilés, scènes ouvertes, médiations et fêtes queer — des espaces safe et bienveillants, pour toustes.</p>
+      <div class="hero-actions">
+        <a class="btn btn-night" href="/agenda/">Prochaines dates</a>
+        <a class="btn btn-night" href="/propositions-artistiques/">Inviter les Créatures</a>
+      </div>
+    </div>
+  </div>
+  <div class="ribbon" aria-hidden="true">
+    <div class="ribbon-track">
+      {% for i in range(0, 8) %}
+        <span>Drag · Créature · Acrobatiquement · Haute · Couture ·&nbsp;</span>
       {% endfor %}
     </div>
-  {% else %}
-    <p>Aucun événement à venir pour le moment.</p>
-  {% endif %}
-  <p><a href="/agenda/">Voir tout l'agenda</a></p>
+  </div>
 </section>
 
-<section class="home-section">
-  <h2>Dernières actualités</h2>
+<section class="section">
+  <div class="section-head">
+    <div>
+      <p class="kicker">Agenda</p>
+      <h2>À l'affiche</h2>
+    </div>
+    <a class="section-head-link" href="/agenda/">Tout l'agenda →</a>
+  </div>
+  <div class="program">
+    {% set upcoming = collections.events | upcomingEvents %}
+    {% if upcoming.length %}
+      {% for event in upcoming.slice(0, 4) %}
+        {{ eventRow(event) }}
+      {% endfor %}
+    {% else %}
+      <p class="program-empty">Aucune date annoncée pour le moment — revenez bientôt, les Créatures préparent quelque chose.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div>
+      <p class="kicker">Propositions artistiques</p>
+      <h2>Ce que font les Créatures</h2>
+    </div>
+    <a class="section-head-link" href="/propositions-artistiques/">Toutes les propositions →</a>
+  </div>
+  <div class="tiles">
+    {% for offering in offerings.slice(0, 6) %}
+      <a class="tile" href="/propositions-artistiques/#{{ offering.slug }}">
+        <span class="tile-mark"></span>
+        <h3>{{ offering.title }}</h3>
+        <p>{{ offering.summary }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-head">
+    <div>
+      <p class="kicker">Actualités</p>
+      <h2>La vie de la Maison</h2>
+    </div>
+    <a class="section-head-link" href="/actualites/">Toutes les actualités →</a>
+  </div>
   <div class="cards">
     {% set latest = collections.articles | byDateDescending %}
     {% for article in latest.slice(0, 3) %}
       {{ articleCard(article) }}
     {% endfor %}
   </div>
-  <p><a href="/actualites/">Toutes les actualités</a></p>
+</section>
+
+<section class="booking night">
+  <div class="booking-inner">
+    <h2>Vous programmez un lieu, une école, une médiathèque&nbsp;?</h2>
+    <p>Lectures, cabarets, workshops ou formats sur mesure : les Créatures se déplacent partout où l'on veut bien les accueillir.</p>
+    <a class="btn btn-night" href="/contact/">Nous écrire</a>
+  </div>
 </section>

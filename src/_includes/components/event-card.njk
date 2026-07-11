@@ -1,11 +1,16 @@
-{% macro eventCard(event) %}
-<article class="event-card">
-  <h3 class="event-card-title">
-    <a href="{{ event.url }}">{{ event.data.title }}</a>
-  </h3>
-  <p class="event-card-date">
-    <time datetime="{{ event.data.date | isoDate }}">{{ event.data.date | formatDateTime }}</time>
-  </p>
-  <p class="event-card-location">{{ event.data.location }}</p>
-</article>
+{% macro eventRow(event) %}
+<a class="program-row" href="{{ event.url }}">
+  <span class="program-day">
+    {{ event.data.date | dayNumber }}
+    <span class="program-month">{{ event.data.date | monthShort }}</span>
+  </span>
+  <span>
+    <span class="program-title">{{ event.data.title }}</span>
+    <span class="program-meta">
+      <time datetime="{{ event.data.date | isoDate }}">{{ event.data.date | formatDateTime }}</time>
+      — {{ event.data.location }}
+    </span>
+  </span>
+  <span class="program-arrow" aria-hidden="true">→</span>
+</a>
 {% endmacro %}

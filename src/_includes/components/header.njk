@@ -1,8 +1,14 @@
 <header class="site-header">
-  <a class="site-header-name" href="/">{{ association.name }}</a>
+  <a class="site-header-name" href="/">
+    <img class="site-logo" src="/media/logo/logo-black.png" alt="{{ association.name }}" loading="eager" decoding="sync" eleventy:widths="204">
+  </a>
   <nav class="site-nav" aria-label="Navigation principale">
-    <a href="/">Accueil</a>
-    <a href="/agenda/">Agenda</a>
-    <a href="/actualites/">Actualités</a>
+    <a href="/la-maison-de-la/" {% if page.url == "/la-maison-de-la/" %}aria-current="page"{% endif %}>La Maison</a>
+    <a href="/les-creatures-de-la/" {% if page.url == "/les-creatures-de-la/" %}aria-current="page"{% endif %}>Les Créatures</a>
+    <a href="/propositions-artistiques/" {% if page.url == "/propositions-artistiques/" %}aria-current="page"{% endif %}>Propositions</a>
+    <a href="/galerie/" {% if page.url == "/galerie/" %}aria-current="page"{% endif %}>Galerie</a>
+    <a href="/agenda/" {% if page.url == "/agenda/" %}aria-current="page"{% endif %}>Agenda</a>
+    <a href="/actualites/" {% if "/actualites/" in page.url %}aria-current="page"{% endif %}>Actualités</a>
+    <a href="/contact/" {% if page.url == "/contact/" %}aria-current="page"{% endif %}>Contact</a>
   </nav>
 </header>

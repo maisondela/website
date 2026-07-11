@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+title: Les Créatures De La
+permalink: /les-creatures-de-la/index.html
+---
+<div class="page page-wide">
+  <header class="page-head">
+    <p class="kicker">Les Créatures De La</p>
+    <h1>La famille</h1>
+    <p class="page-lede">Les Créatures qui font vivre la Maison, autour des fondateurices De La Beuhchaire et De La Saboté·e. Survolez un portrait pour révéler la Créature.</p>
+  </header>
+
+  <div class="portraits">
+    {% for portrait in portraits %}
+      <figure class="portrait" style="background-image: url({{ portrait.mono | lqip }})">
+        <img class="portrait-mono" src="{{ portrait.mono }}" alt="Portrait d'une Créature de la Maison" sizes="(max-width: 36rem) 100vw, (max-width: 56rem) 50vw, 33vw" eleventy:widths="480,800">
+        <img class="portrait-color" src="{{ portrait.color }}" alt="" aria-hidden="true" sizes="(max-width: 36rem) 100vw, (max-width: 56rem) 50vw, 33vw" eleventy:widths="480,800">
+      </figure>
+    {% endfor %}
+  </div>
+</div>

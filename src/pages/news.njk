@@ -5,10 +5,15 @@ permalink: /actualites/index.html
 ---
 {% from "components/article-card.njk" import articleCard %}
 
-<h1>Actualités</h1>
+<div class="page page-wide">
+  <header class="page-head">
+    <p class="kicker">Actualités</p>
+    <h1>La vie de la Maison</h1>
+  </header>
 
-<div class="cards">
-  {% for article in collections.articles | byDateDescending %}
-    {{ articleCard(article) }}
-  {% endfor %}
+  <div class="cards">
+    {% for article in collections.articles | byDateDescending %}
+      {{ articleCard(article) }}
+    {% endfor %}
+  </div>
 </div>
