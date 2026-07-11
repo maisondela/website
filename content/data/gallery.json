@@ -1,0 +1,9 @@
+{
+  "images": [
+    { "image": "/media/artwork/black.avif", "caption": "" },
+    { "image": "/media/artwork/blue.avif", "caption": "" },
+    { "image": "/media/artwork/green.png", "caption": "" },
+    { "image": "/media/artwork/orange.avif", "caption": "" },
+    { "image": "/media/artwork/pink.avif", "caption": "" }
+  ]
+}

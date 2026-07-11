@@ -11,9 +11,9 @@ permalink: /galerie/index.html
   </header>
 
   <div class="gallery">
-    {% for image in artwork %}
-      <figure class="gallery-item" style="background-image: url({{ image | lqip }})">
-        <img src="{{ image }}" alt="Visuel de la Maison De La" sizes="(max-width: 36rem) 100vw, 33vw" eleventy:widths="480,800">
+    {% for item in gallery.images %}
+      <figure class="gallery-item" style="background-image: url({{ item.image | lqip }})">
+        <img src="{{ item.image }}" alt="{{ item.caption or "Visuel de la Maison De La" }}" sizes="(max-width: 36rem) 100vw, 33vw" eleventy:widths="480,800">
       </figure>
     {% endfor %}
   </div>

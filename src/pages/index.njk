@@ -6,11 +6,11 @@ permalink: /index.html
 {% from "components/article-card.njk" import articleCard %}
 
 <section class="night hero-stage">
-  <img class="hero-photo" src="/media/artwork/pink.avif" alt="" sizes="100vw" eleventy:widths="800,1440" loading="eager" decoding="async" fetchpriority="high">
+  <img class="hero-photo" src="{{ homepage.hero_image }}" alt="" sizes="100vw" eleventy:widths="800,1440" loading="eager" decoding="async" fetchpriority="high">
   <div class="hero">
     <div class="hero-inner">
       <h1 class="hero-title"><span>Maison</span><span>De La</span></h1>
-      <p class="hero-lede">Collectif bordelais d'Art Drag. Cabarets, défilés, scènes ouvertes, médiations et fêtes queer — des espaces safe et bienveillants, pour toustes.</p>
+      <p class="hero-lede">{{ homepage.hero_tagline }}</p>
       <div class="hero-actions">
         <a class="btn btn-night" href="/agenda/">Prochaines dates</a>
         <a class="btn btn-night" href="/propositions-artistiques/">Inviter les Créatures</a>
@@ -55,11 +55,11 @@ permalink: /index.html
     <a class="section-head-link" href="/propositions-artistiques/">Toutes les propositions →</a>
   </div>
   <div class="tiles">
-    {% for offering in offerings.slice(0, 6) %}
-      <a class="tile" href="/propositions-artistiques/#{{ offering.slug }}">
+    {% for offering in (collections.offerings | sortByOrder).slice(0, 6) %}
+      <a class="tile" href="/propositions-artistiques/#{{ offering.fileSlug }}">
         <span class="tile-mark"></span>
-        <h3>{{ offering.title }}</h3>
-        <p>{{ offering.summary }}</p>
+        <h3>{{ offering.data.title }}</h3>
+        <p>{{ offering.data.summary }}</p>
       </a>
     {% endfor %}
   </div>
@@ -83,8 +83,8 @@ permalink: /index.html
 
 <section class="booking night">
   <div class="booking-inner">
-    <h2>Vous programmez un lieu, une école, une médiathèque&nbsp;?</h2>
-    <p>Lectures, cabarets, workshops ou formats sur mesure : les Créatures se déplacent partout où l'on veut bien les accueillir.</p>
+    <h2>{{ homepage.booking_title }}</h2>
+    <p>{{ homepage.booking_text }}</p>
     <a class="btn btn-night" href="/contact/">Nous écrire</a>
   </div>
 </section>

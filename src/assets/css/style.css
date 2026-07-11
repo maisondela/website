@@ -638,6 +638,18 @@ img {
   }
 }
 
+.portrait-name {
+  position: absolute;
+  inset: auto 0 0;
+  margin: 0;
+  padding: 2.2rem 1rem 0.8rem;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--paper);
+  background: linear-gradient(180deg, rgba(27, 16, 21, 0), rgba(27, 16, 21, 0.75));
+}
+
 .portrait-color {
   opacity: 0;
   transition: opacity 320ms ease;

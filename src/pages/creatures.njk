@@ -11,10 +11,13 @@ permalink: /les-creatures-de-la/index.html
   </header>
 
   <div class="portraits">
-    {% for portrait in portraits %}
-      <figure class="portrait" style="background-image: url({{ portrait.mono | lqip }})">
-        <img class="portrait-mono" src="{{ portrait.mono }}" alt="Portrait d'une Créature de la Maison" sizes="(max-width: 36rem) 100vw, (max-width: 56rem) 50vw, 33vw" eleventy:widths="480,800">
-        <img class="portrait-color" src="{{ portrait.color }}" alt="" aria-hidden="true" sizes="(max-width: 36rem) 100vw, (max-width: 56rem) 50vw, 33vw" eleventy:widths="480,800">
+    {% for creature in collections.creatures | sortByOrder %}
+      <figure class="portrait" style="background-image: url({{ creature.data.mono | lqip }})">
+        <img class="portrait-mono" src="{{ creature.data.mono }}" alt="{{ creature.data.name or "Portrait d'une Créature de la Maison" }}" sizes="(max-width: 36rem) 100vw, (max-width: 56rem) 50vw, 33vw" eleventy:widths="480,800">
+        <img class="portrait-color" src="{{ creature.data.color }}" alt="" aria-hidden="true" sizes="(max-width: 36rem) 100vw, (max-width: 56rem) 50vw, 33vw" eleventy:widths="480,800">
+        {% if creature.data.name %}
+          <figcaption class="portrait-name">{{ creature.data.name }}</figcaption>
+        {% endif %}
       </figure>
     {% endfor %}
   </div>

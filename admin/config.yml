@@ -33,6 +33,39 @@ collections:
       - { name: location, label: Lieu, widget: string }
       - { name: body, label: Description, widget: markdown }
 
+  - name: offerings
+    label: Propositions artistiques
+    label_singular: Proposition
+    folder: content/offerings
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Titre, widget: string }
+      - { name: summary, label: Résumé (une phrase), widget: text }
+      - { name: price, label: Tarif, widget: string }
+      - { name: order, label: Ordre d'affichage, widget: number, value_type: int }
+      - { name: body, label: Description, widget: markdown }
+
+  - name: creatures
+    label: Les Créatures
+    label_singular: Créature
+    folder: content/creatures
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: name, label: Nom de la Créature, widget: string, required: false }
+      - { name: order, label: Ordre d'affichage, widget: number, value_type: int }
+      - name: mono
+        label: Portrait noir et blanc
+        widget: image
+        media_folder: /media/portraits/mono
+        public_folder: /media/portraits/mono
+      - name: color
+        label: Portrait couleur (révélé au survol)
+        widget: image
+        media_folder: /media/portraits/color
+        public_folder: /media/portraits/color
+
   - name: settings
     label: Paramètres du site
     files:
@@ -44,3 +77,37 @@ collections:
           - { name: description, label: Description courte, widget: text }
           - { name: address, label: Adresse, widget: text }
           - { name: email, label: Email de contact, widget: string }
+      - name: homepage
+        label: Page d'accueil
+        file: content/data/homepage.json
+        fields:
+          - name: hero_image
+            label: Image du bandeau d'accueil
+            widget: image
+            media_folder: /media/artwork
+            public_folder: /media/artwork
+          - { name: hero_tagline, label: Phrase d'accroche, widget: text }
+          - { name: booking_title, label: Bandeau programmateurices — titre, widget: string }
+          - { name: booking_text, label: Bandeau programmateurices — texte, widget: text }
+      - name: house
+        label: Page La Maison De La
+        file: content/data/house.json
+        fields:
+          - { name: vision, label: Vision, widget: markdown, required: false }
+          - { name: operations, label: Fonctionnement, widget: markdown, required: false }
+          - { name: values, label: Valeurs, widget: markdown, required: false }
+          - { name: charter, label: Charte, widget: markdown, required: false }
+      - name: gallery
+        label: Galerie
+        file: content/data/gallery.json
+        fields:
+          - name: images
+            label: Images
+            widget: list
+            fields:
+              - name: image
+                label: Image
+                widget: image
+                media_folder: /media/artwork
+                public_folder: /media/artwork
+              - { name: caption, label: Légende, widget: string, required: false }

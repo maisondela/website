@@ -1,5 +1,7 @@
-import { readdirSync } from "node:fs";
 import Image, { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import markdownIt from "markdown-it";
+
+const md = markdownIt();
 
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
@@ -23,36 +25,11 @@ export default function (eleventyConfig) {
     },
   });
 
-  const featuredPortraits = [
-    "dsc-8446",
-    "dsc-8455",
-    "dsc-8465",
-    "dsc-8471",
-    "dsc-8478",
-    "dsc-8482",
-    "dsc-8498",
-    "dsc-8505",
-    "dsc-8528",
-    "dsc-8542",
-    "dsc-8546",
-    "dsc-8548",
-  ];
-  const monoPortraits = new Set(readdirSync("media/portraits/mono"));
-  const colorPortraits = new Set(readdirSync("media/portraits/color"));
-  eleventyConfig.addGlobalData(
-    "portraits",
-    featuredPortraits
-      .map((slug) => `${slug}.jpg`)
-      .filter((file) => monoPortraits.has(file) && colorPortraits.has(file))
-      .map((file) => ({
-        mono: `/media/portraits/mono/${file}`,
-        color: `/media/portraits/color/${file}`,
-      }))
+  eleventyConfig.addFilter("sortByOrder", (items) =>
+    [...items].sort((a, b) => a.data.order - b.data.order)
   );
-  eleventyConfig.addGlobalData(
-    "artwork",
-    readdirSync("media/artwork").map((file) => `/media/artwork/${file}`)
-  );
+
+  eleventyConfig.addFilter("markdown", (value) => md.render(value || ""));
 
   eleventyConfig.addFilter("lqip", async (src) => {
     const stats = await Image(src.replace(/^\//, ""), {
