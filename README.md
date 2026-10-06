@@ -87,7 +87,10 @@ Then update the version recorded above, test `/admin/` locally and commit.
 ## Deployment
 
 Push to `main` → `.github/workflows/deploy.yml`: Eleventy build, then the
-`_site/` artifact is published to GitHub Pages. No secrets are needed. Every
+`_site/` artifact is published to GitHub Pages. No secrets are needed. The
+build reads the Pages base path (`/website` until the custom domain is set,
+then empty) through `PATH_PREFIX`, so every root-relative URL is prefixed by
+Eleventy's `HtmlBasePlugin`; CSS and JS reference assets with relative paths. Every
 CMS save is a commit on `main`, so the site rebuilds within a couple of
 minutes.
 

@@ -1,5 +1,6 @@
 import Image, { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import markdownIt from "markdown-it";
+import { HtmlBasePlugin } from "@11ty/eleventy";
 
 const md = markdownIt();
 
@@ -17,6 +18,8 @@ export default function (eleventyConfig) {
   eleventyConfig.ignores.add("admin/**");
   eleventyConfig.ignores.add("README.md");
   eleventyConfig.ignores.add("CLAUDE.md");
+
+  eleventyConfig.addPlugin(HtmlBasePlugin);
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     formats: ["avif", "webp", "auto"],
@@ -109,6 +112,7 @@ export default function (eleventyConfig) {
   );
 
   return {
+    pathPrefix: process.env.PATH_PREFIX || "/",
     dir: {
       input: ".",
       includes: "src/_includes",

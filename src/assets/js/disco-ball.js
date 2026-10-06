@@ -31,7 +31,7 @@ async function init() {
   if (motionQuery.matches || !supportsWebgl()) return;
   let THREE;
   try {
-    THREE = await import("/assets/vendor/three.module.min.js");
+    THREE = await import("../vendor/three.module.min.js");
   } catch {
     return;
   }
