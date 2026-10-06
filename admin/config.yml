@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: ljcsilvert/maisondela
+  repo: maisondela/website
   branch: main
 
 media_folder: uploads

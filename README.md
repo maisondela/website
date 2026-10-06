@@ -2,7 +2,7 @@
 
 Static site built with [Eleventy](https://www.11ty.dev/) (3.x), edited through
 [Sveltia CMS](https://github.com/sveltia/sveltia-cms) (`/admin/`), deployed by
-GitHub Actions to an nginx server (OVHcloud). User-facing content is in French.
+GitHub Actions to GitHub Pages at https://maisondela.fr. User-facing content is in French.
 
 ## Local development
 
@@ -47,8 +47,10 @@ what the templates consume. Any schema change happens on both sides at once.
 ## Initial setup (maintainer)
 
 1. Make sure `repo:` in `admin/config.yml` points to this repository.
-2. Configure the GitHub Actions secrets (see below).
-3. Require 2FA on every GitHub account with access to the repository.
+2. *Settings → Pages → Build and deployment → Source*: **GitHub Actions**.
+3. *Settings → Pages → Custom domain*: `maisondela.fr`, then tick
+   **Enforce HTTPS** once the certificate is issued.
+4. Require 2FA on every GitHub account with access to the repository.
 
 ## Editor access (GitHub token)
 
@@ -84,28 +86,30 @@ Then update the version recorded above, test `/admin/` locally and commit.
 
 ## Deployment
 
-Push to `main` → `.github/workflows/deploy.yml`: Eleventy build then
-`rsync --delete` of `_site/` to the server.
+Push to `main` → `.github/workflows/deploy.yml`: Eleventy build, then the
+`_site/` artifact is published to GitHub Pages. No secrets are needed. Every
+CMS save is a commit on `main`, so the site rebuilds within a couple of
+minutes.
 
-GitHub Actions secrets to configure (*Settings → Secrets and variables →
-Actions*):
+## DNS (maisondela.fr)
 
-| Secret | Content |
-|---|---|
-| `DEPLOY_SSH_KEY` | Private SSH key **dedicated to deployment** |
-| `DEPLOY_HOST` | Server host |
-| `DEPLOY_USER` | Dedicated user, no root privileges |
-| `DEPLOY_PATH` | Site directory (the only writable directory) |
+At the domain registrar:
 
-## Server (reminders)
+| Type | Name | Value |
+|---|---|---|
+| `A` | `@` | `185.199.108.153` |
+| `A` | `@` | `185.199.109.153` |
+| `A` | `@` | `185.199.110.153` |
+| `A` | `@` | `185.199.111.153` |
+| `AAAA` | `@` | `2606:50c0:8000::153` |
+| `AAAA` | `@` | `2606:50c0:8001::153` |
+| `AAAA` | `@` | `2606:50c0:8002::153` |
+| `AAAA` | `@` | `2606:50c0:8003::153` |
+| `CNAME` | `www` | `maisondela.github.io.` |
 
-- nginx serves static files only; no server-side code.
-- HTTPS required (Sveltia CMS needs a secure context) — auto-renewed
-  Let's Encrypt certificate (certbot). SSH by key only.
-- Content Security Policy for `/admin/`: follow the
-  [Sveltia CMS documentation](https://github.com/sveltia/sveltia-cms#setting-up-content-security-policy)
-  (no `unsafe-eval` or `unsafe-inline` in `script-src`; allow `connect-src`
-  to `api.github.com` and the hosts listed in the docs).
+Remove any other `A`/`AAAA` records on `@`. To prevent domain takeover, verify
+`maisondela.fr` in the organization settings (*Settings → Pages → Add a
+domain*).
 
 ## Security — non-negotiable rules
 
