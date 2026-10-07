@@ -5,8 +5,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <title>Administration du site</title>
+  <style>
+    div:has(> div > #guide) {
+      overflow-y: auto;
+      align-items: flex-start;
+    }
+    #guide {
+      width: min(560px, 100%);
+      padding: 20px 24px;
+      border-radius: 12px;
+      background: var(--sui-secondary-background-color, #f4f4f4);
+      color: var(--sui-primary-foreground-color, #222);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    #guide[hidden] {
+      display: none;
+    }
+    #guide h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+    #guide details {
+      margin-top: 12px;
+    }
+    #guide summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    #guide ol,
+    #guide ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    #guide li + li {
+      margin-top: 6px;
+    }
+    #guide a {
+      color: var(--sui-primary-accent-color-text, inherit);
+    }
+    #guide code {
+      font-size: 13px;
+    }
+  </style>
 </head>
 <body>
-  <script src="sveltia-cms.js" type="module"></script>
+  <div id="nc-root"></div>
+  <section id="guide" hidden>
+    <h2>Comment se connecter</h2>
+    <p>Cliquez sur <strong>Sign In Using Access Token</strong> et collez votre clé d'accès (elle commence par <code>github_pat_</code>). Le navigateur s'en souviendra. Le bouton <em>Sign In with GitHub</em> ne fonctionne pas ici.</p>
+    <details>
+      <summary>Première fois ? Créer sa clé d'accès (15 minutes)</summary>
+      <ol>
+        <li>Créez un compte gratuit sur <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a>.</li>
+        <li>Activez la double authentification : votre photo en haut à droite → <em>Settings</em> → <em>Password and authentication</em> → <em>Enable two-factor authentication</em>.</li>
+        <li>Envoyez votre nom d'utilisateur GitHub à Léo, puis acceptez l'invitation reçue par email (<em>Join maisondela</em>).</li>
+        <li>Ouvrez <a href="https://github.com/settings/personal-access-tokens/new?name=Site+Maison+De+La&amp;target_name=maisondela&amp;expires_in=365&amp;contents=write" target="_blank" rel="noopener">la page de création de clé</a> et vérifiez :
+          <ul>
+            <li><em>Resource owner</em> : <strong>maisondela</strong></li>
+            <li><em>Repository access</em> : <em>Only select repositories</em> → <strong>website</strong></li>
+            <li><em>Permissions</em> → <strong>Contents</strong> : <em>Read and write</em></li>
+          </ul>
+        </li>
+        <li>Cliquez sur <strong>Generate token</strong> et copiez la clé tout de suite : GitHub ne la montrera plus jamais. Gardez-la dans votre gestionnaire de mots de passe.</li>
+      </ol>
+    </details>
+    <details>
+      <summary>Après la connexion</summary>
+      <ul>
+        <li>Choisissez une rubrique à gauche, modifiez le texte ou ajoutez une image, puis cliquez sur <strong>Save</strong>.</li>
+        <li>Le site se met à jour tout seul en 2 à 3 minutes.</li>
+        <li>Chaque enregistrement est gardé dans l'historique : une erreur peut toujours être annulée.</li>
+      </ul>
+    </details>
+    <details>
+      <summary>En cas de souci</summary>
+      <ul>
+        <li><strong>Clé refusée</strong> : elle a peut-être expiré (au bout d'un an). Créez-en une nouvelle.</li>
+        <li><strong>Clé perdue ou partagée par erreur</strong> : supprimez-la sur <a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener">vos clés GitHub</a> et créez-en une nouvelle.</li>
+        <li><strong>Autre chose</strong> : écrivez à Léo.</li>
+      </ul>
+      <p>Votre clé est personnelle : ne la partagez avec personne, même dans l'équipe.</p>
+    </details>
+  </section>
+  <script>
+    const guide = document.getElementById("guide");
+    const signInPattern = /sign in|se connecter/i;
+    const placeGuide = () => {
+      const button = [...document.querySelectorAll("#nc-root button")].find((b) => signInPattern.test(b.textContent));
+      const panel = button?.closest(".inner");
+      if (panel) {
+        if (guide.parentElement !== panel) panel.append(guide);
+        guide.hidden = false;
+      } else if (!guide.hidden) {
+        guide.hidden = true;
+        document.body.append(guide);
+      }
+    };
+    new MutationObserver(placeGuide).observe(document.getElementById("nc-root"), { childList: true, subtree: true });
+  </script>
+  <script src="./sveltia-cms.js"></script>
 </body>
 </html>
