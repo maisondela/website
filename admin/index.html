@@ -53,7 +53,7 @@
   <div id="nc-root"></div>
   <section id="guide" hidden>
     <h2>Comment se connecter</h2>
-    <p>Cliquez sur <strong>Sign In Using Access Token</strong> et collez votre clé d'accès (elle commence par <code>github_pat_</code>). Le navigateur s'en souviendra. Le bouton <em>Sign In with GitHub</em> ne fonctionne pas ici.</p>
+    <p>Cliquez sur <strong>Sign In Using Access Token</strong> et collez votre clé d'accès (elle commence par <code>github_pat_</code>). Le navigateur s'en souviendra.</p>
     <details>
       <summary>Première fois ? Créer sa clé d'accès (15 minutes)</summary>
       <ol>
@@ -91,8 +91,11 @@
   <script>
     const guide = document.getElementById("guide");
     const signInPattern = /sign in|se connecter/i;
+    const oauthPattern = /sign in with/i;
     const placeGuide = () => {
-      const button = [...document.querySelectorAll("#nc-root button")].find((b) => signInPattern.test(b.textContent));
+      const buttons = [...document.querySelectorAll("#nc-root button")];
+      buttons.filter((b) => oauthPattern.test(b.textContent) && !b.hidden).forEach((b) => (b.hidden = true));
+      const button = buttons.find((b) => signInPattern.test(b.textContent));
       const panel = button?.closest(".inner");
       if (panel) {
         if (guide.parentElement !== panel) panel.append(guide);
