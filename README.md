@@ -54,19 +54,22 @@ what the templates consume. Any schema change happens on both sides at once.
 
 ## Editor access (GitHub token)
 
-The editor signs in at `https://<domain>/admin/` with a **fine-grained GitHub
-personal access token**:
+The repository belongs to the `maisondela` personal account. Fine-grained
+tokens cannot reach another personal account's repositories, so editors use a
+**classic personal access token**:
 
-1. The editor's GitHub account must be a collaborator on the repository
-   (write) with 2FA enabled.
-2. GitHub → *Settings → Developer settings → Personal access tokens →
-   Fine-grained tokens → Generate new token*.
-3. **Repository access**: *Only select repositories* → this repository only.
-4. **Permissions**: *Contents: Read and write*. Nothing else.
-5. Set an **expiration date** (1 year max; renew afterwards).
-6. In `/admin/`, choose token sign-in and paste the token.
+1. The `maisondela` account adds the editor as a collaborator
+   (*Settings → Collaborators → Add people*); the editor accepts the invitation
+   and has 2FA enabled.
+2. The editor creates a classic token at
+   `https://github.com/settings/tokens/new?scopes=public_repo&description=Site+Maison+De+La`
+   with only the `public_repo` scope and a one-year expiration.
+3. In `/admin/`, choose *Sign In Using Access Token* and paste the token.
 
-The token must never be committed or shared.
+The `public_repo` scope grants write access to every public repository the
+editor can push to, so editors should use an account dedicated to the site.
+The token must never be committed or shared. The sign-in guide shown to
+editors lives in `admin/index.html`.
 
 ## Updating Sveltia CMS
 
